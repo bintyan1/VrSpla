@@ -10,10 +10,10 @@ public class BulletFactory : MonoBehaviour
     private Transform _muzzle;
 
     void Update(){
-        Fire();
+        //Fire();
     }
 
-    void Fire(){
+    public void Fire(){
         
         Vector3 pos = _muzzle.position;
         var obj = Instantiate(_sphere, pos, Quaternion.identity);

@@ -396,7 +396,7 @@ MonoBehaviour:
   target: {fileID: 0}
   damping: 10
   speed: 5
-  yOffset: 0.1
+  yOffset: 1
   attackExplosion: {fileID: 7591109422235924021, guid: 4df80846afd77df4ea0632a6eb2a37bb, type: 3}
   deathExplosion: {fileID: 0}
   ikura: {fileID: 6525989158563207493, guid: f84c9703235466449aa54c00ffd3b0e5, type: 3}

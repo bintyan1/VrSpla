@@ -66,6 +66,12 @@ public class SlimeMove : MonoBehaviour
         {
             //爆発エフェクト（緑）再生
             Instantiate(attackExplosion, transform.position + new Vector3(0, yOffset, 0), Quaternion.identity);
+            //爆発エフェクト（ピンク）再生
+            //いくらを出す
+            for (int i = 0; i < 3; i++)
+            {
+                GameObject ikuras = Instantiate(ikura, transform.position + new Vector3(-1f * i * 0.2f, yOffset, -1f * i * 0.2f), Quaternion.identity);
+            }
             //地面塗りオブジェクト（兼攻撃判定）を出す
 
         }

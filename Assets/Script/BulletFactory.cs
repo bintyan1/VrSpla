@@ -14,29 +14,47 @@ public class BulletFactory : MonoBehaviour
     public int reload_speed = 1;
     public int reload_distance = 30;
     private int time;
-    void Start() {
+    private float fire_time = 60f;
+    public float fire_rate = 60f;
+    public float fire_power;
+    void Start()
+    {
         slider = GameObject.Find("Slider").GetComponent<Slider>();
         slider.value = 1000;
     }
-    void Update(){
-        if (0 < OVRInput.Get(OVRInput.Axis1D.SecondaryIndexTrigger)) {
-            if(0 < slider.value){
-                Fire(); 
-                slider.value -= fire_speed;
+    void Update()
+    {
+        if (0 < OVRInput.Get(OVRInput.Axis1D.SecondaryIndexTrigger))
+        {
+            if (0 < slider.value)
+            {
+                fire_time -= fire_rate;
+                if (fire_time < 0)
+                {
+                    Fire();
+                    fire_time = 60f;
+                    slider.value -= fire_speed;
+                }
+
             }
             time = 0;
-        }else if(slider.value < slider.maxValue){
-            if(reload_distance < time){
+        }
+        else if (slider.value < slider.maxValue)
+        {
+            if (reload_distance < time)
+            {
                 slider.value += reload_speed;
             }
             time++;
+            fire_time = 60f;
         }
     }
 
-    public void Fire(){
+    public void Fire()
+    {
         Vector3 pos = _muzzle.position;
         var obj = Instantiate(_sphere, pos, Quaternion.identity);
         Rigidbody rigidbody = obj.GetComponent<Rigidbody>();
-        rigidbody.AddForce (_muzzle.forward * 20, ForceMode.Impulse);
+        rigidbody.AddForce(_muzzle.forward * fire_power, ForceMode.Impulse);
     }
 }

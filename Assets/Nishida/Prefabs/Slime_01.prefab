@@ -234,7 +234,7 @@ Rigidbody:
   m_GameObject: {fileID: 5259991563187114065}
   serializedVersion: 2
   m_Mass: 1
-  m_Drag: 8.67
+  m_Drag: 3
   m_AngularDrag: 0
   m_UseGravity: 1
   m_IsKinematic: 0
@@ -395,10 +395,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 0}
   damping: 10
-  speed: 5
+  speed: 15
   yOffset: 1
   attackExplosion: {fileID: 7591109422235924021, guid: 4df80846afd77df4ea0632a6eb2a37bb, type: 3}
-  deathExplosion: {fileID: 0}
+  deathExplosion: {fileID: 7591109422235924021, guid: fe9fd5939d26d094498dfdba77c22457, type: 3}
   ikura: {fileID: 6525989158563207493, guid: f84c9703235466449aa54c00ffd3b0e5, type: 3}
 --- !u!1 &6773528682001146057
 GameObject:

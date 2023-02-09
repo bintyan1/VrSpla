@@ -8,8 +8,8 @@ public class SlimeMove : MonoBehaviour
     private Rigidbody rb;
     public Transform target;
     public float damping, speed, yOffset;
-    private int hp;
-    private bool isAttack = false;
+    private int hp = 100;
+    private bool isAttack, isDead = false;
     private Animator animator;
     public ParticleSystem attackExplosion, deathExplosion;
     public GameObject ikura;
@@ -21,15 +21,16 @@ public class SlimeMove : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         //爆発アニメーションを登録する
         animator = this.GetComponent<Animator>();
-        target = GameObject.Find("tmpPlayer").transform;
+        target = GameObject.Find("OVRPlayerController").transform;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (hp < 0)
+        if (hp < 0 && !isDead)
         {
-            death();
+            explosion();
+            isDead = true;
         }
 
         var lookPos = target.position - transform.position;
@@ -41,6 +42,15 @@ public class SlimeMove : MonoBehaviour
 
         //rbの回転をさせない様にする
         rb.constraints = RigidbodyConstraints.FreezeRotation;
+    }
+
+    private void OnCollisionEnter(Collision other)
+    {
+        if (other.gameObject.tag == "bullet")
+        {
+            hp -= 35;
+            Destroy(other.gameObject);
+        }
     }
 
     private void OnTriggerEnter(Collider other)
@@ -66,18 +76,13 @@ public class SlimeMove : MonoBehaviour
         {
             //爆発エフェクト（緑）再生
             Instantiate(attackExplosion, transform.position + new Vector3(0, yOffset, 0), Quaternion.identity);
-            //爆発エフェクト（ピンク）再生
-            //いくらを出す
-            for (int i = 0; i < 3; i++)
-            {
-                GameObject ikuras = Instantiate(ikura, transform.position + new Vector3(-1f * i * 0.2f, yOffset, -1f * i * 0.2f), Quaternion.identity);
-            }
             //地面塗りオブジェクト（兼攻撃判定）を出す
 
         }
         else
         {
             //爆発エフェクト（ピンク）再生
+            Instantiate(deathExplosion, transform.position + new Vector3(0, yOffset, 0), Quaternion.identity);
             //いくらを出す
             for (int i = 0; i < 3; i++)
             {

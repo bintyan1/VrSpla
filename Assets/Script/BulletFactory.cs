@@ -17,6 +17,7 @@ public class BulletFactory : MonoBehaviour
     private float fire_time = 60f;
     public float fire_rate = 60f;
     public float fire_power;
+    public GameObject effect;
     void Start()
     {
         slider = GameObject.Find("Slider").GetComponent<Slider>();
@@ -24,7 +25,7 @@ public class BulletFactory : MonoBehaviour
     }
     void Update()
     {
-        if (0 < OVRInput.Get(OVRInput.Axis1D.SecondaryIndexTrigger))
+        if (0 < OVRInput.Get(OVRInput.Axis1D.SecondaryIndexTrigger) || Input.GetMouseButton(0))
         {
             if (0 < slider.value)
             {
@@ -54,6 +55,7 @@ public class BulletFactory : MonoBehaviour
     {
         Vector3 pos = _muzzle.position;
         var obj = Instantiate(_sphere, pos, Quaternion.identity);
+        Instantiate(effect,pos,Quaternion.identity);
         Rigidbody rigidbody = obj.GetComponent<Rigidbody>();
         rigidbody.AddForce(_muzzle.forward * fire_power, ForceMode.Impulse);
     }

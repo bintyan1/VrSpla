@@ -6,7 +6,8 @@ public class SlimeMove : MonoBehaviour
 {
     //Rigidbody型のrbという変数を作る
     private Rigidbody rb;
-    public Transform target;
+    public Transform tf_target;
+    public string target;
     public float damping, speed, yOffset;
     private int hp = 100;
     private bool isAttack, isDead = false;
@@ -21,7 +22,7 @@ public class SlimeMove : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         //爆発アニメーションを登録する
         animator = this.GetComponent<Animator>();
-        target = GameObject.Find("OVRPlayerController").transform;
+        tf_target = GameObject.Find(target).transform;
     }
 
     // Update is called once per frame
@@ -33,7 +34,7 @@ public class SlimeMove : MonoBehaviour
             isDead = true;
         }
 
-        var lookPos = target.position - transform.position;
+        var lookPos = tf_target.position - transform.position;
         lookPos.y = 0;
         var rotation = Quaternion.LookRotation(lookPos);
         transform.rotation = Quaternion.Slerp(transform.rotation, rotation, Time.deltaTime * damping);

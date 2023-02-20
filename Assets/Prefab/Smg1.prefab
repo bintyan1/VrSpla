@@ -136,3 +136,4 @@ MonoBehaviour:
   reload_distance: 30
   fire_rate: 5
   fire_power: 5
+  effect: {fileID: 7591109422216228693, guid: ebfe257c795900a409d78e836d05be3d, type: 3}

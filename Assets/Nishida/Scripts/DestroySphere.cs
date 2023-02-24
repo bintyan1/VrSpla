@@ -5,6 +5,13 @@ using UnityEngine;
 public class DestroySphere : MonoBehaviour
 {
     public GameObject hit;
+
+    public Color color;
+
+    private void Start()
+    {
+        GetComponent<MeshRenderer>().material.color = color;
+    }
     private void OnCollisionStay(Collision collision)
     {
         Debug.Log(collision.gameObject.tag);

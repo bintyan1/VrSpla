@@ -13,7 +13,7 @@ public class SlimeMove : MonoBehaviour
     private bool isAttack, isDead = false;
     private Animator animator;
     public ParticleSystem attackExplosion, deathExplosion;
-    public GameObject ikura;
+    public GameObject ikura, hit;
 
 
     private void Start()
@@ -50,6 +50,7 @@ public class SlimeMove : MonoBehaviour
         if (other.gameObject.tag == "bullet")
         {
             hp -= 35;
+            Instantiate(hit, other.transform.position, Quaternion.identity);
             Destroy(other.gameObject);
         }
     }

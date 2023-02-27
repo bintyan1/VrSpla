@@ -13,7 +13,7 @@ public class SlimeMove : MonoBehaviour
     private bool isAttack, isDead = false;
     private Animator animator;
     public ParticleSystem attackExplosion, deathExplosion;
-    public GameObject ikura, hit;
+    public GameObject ikura, hit, expInkGreen, expInkPink;
 
 
     private void Start()
@@ -81,7 +81,6 @@ public class SlimeMove : MonoBehaviour
             //爆発エフェクト（緑）再生
             Instantiate(attackExplosion, transform.position + new Vector3(0, yOffset, 0), Quaternion.identity);
             //地面塗りオブジェクト（兼攻撃判定）を出す
-
         }
         else
         {

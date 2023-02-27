@@ -4945,7 +4945,7 @@ MonoBehaviour:
     brushTexture: {fileID: 2800000, guid: b8702b5a8624a114f82a6d09bc3ce746, type: 3}
     brushNormalTexture: {fileID: 2800000, guid: 945b831b22eb06945bf77e00f16ff51a, type: 3}
     brushHeightTexture: {fileID: 0}
-    brushScale: 0.068
+    brushScale: 0.051
     rotateAngle: 0
     brushNormalBlend: 0.1
     brushHeightBlend: 0

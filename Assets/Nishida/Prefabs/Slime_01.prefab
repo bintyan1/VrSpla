@@ -203,7 +203,7 @@ GameObject:
   - component: {fileID: 3408696143169825495}
   m_Layer: 0
   m_Name: Slime_01
-  m_TagString: Untagged
+  m_TagString: Slime
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -383,7 +383,7 @@ MonoBehaviour:
   tf_target: {fileID: 0}
   target: MainCamera
   damping: 10
-  speed: 12.66
+  speed: 8.81
   yOffset: 1
   attackExplosion: {fileID: 7591109422235924021, guid: 4df80846afd77df4ea0632a6eb2a37bb, type: 3}
   deathExplosion: {fileID: 7591109422235924021, guid: fe9fd5939d26d094498dfdba77c22457, type: 3}

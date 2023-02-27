@@ -8,24 +8,31 @@ public class DestroySphere : MonoBehaviour
 
     public Color color;
 
+    private AudioSource[] audios;
+
+
+
     private void Start()
     {
         GetComponent<MeshRenderer>().material.color = color;
+        audios = hit.GetComponents<AudioSource>();
     }
     private void OnCollisionStay(Collision collision)
     {
         Debug.Log(collision.gameObject.tag);
-        if(collision.gameObject.tag == "Stage")
-        {
-            Instantiate(hit, transform.position, Quaternion.identity);
-            Destroy(gameObject);
-        }
+
+        hit.GetComponents<AudioSource>()[1].enabled = true;
+        hit.GetComponents<AudioSource>()[0].enabled = false;
+        Instantiate(hit, transform.position, Quaternion.identity);
+        Destroy(gameObject);
     }
 
-    void Update(){
+    void Update()
+    {
         Transform _transform = this.transform;
-        if(_transform.position.y < -20){
-            Destroy(gameObject,1f);
+        if (_transform.position.y < -20)
+        {
+            Destroy(gameObject, 1f);
         }
     }
 }

@@ -50,6 +50,8 @@ public class SlimeMove : MonoBehaviour
         if (other.gameObject.tag == "bullet")
         {
             hp -= 35;
+            hit.GetComponents<AudioSource>()[0].enabled = true;
+            hit.GetComponents<AudioSource>()[1].enabled = false;
             Instantiate(hit, other.transform.position, Quaternion.identity);
             Destroy(other.gameObject);
         }
@@ -97,7 +99,7 @@ public class SlimeMove : MonoBehaviour
         GetComponent<SphereCollider>().enabled = false;
         GetComponentInChildren<SkinnedMeshRenderer>().enabled = false;
         //1秒後に自身を破壊
-        Invoke("destroy", 1);
+        Invoke("destroy", 0.1f);
     }
 
     private void destroy()

@@ -8,16 +8,30 @@ public class SlimeMove : MonoBehaviour
     private Rigidbody rb;
     public Transform tf_target;
     public string target;
-    public float damping, speed, yOffset;
+    public float damping, speed, yOffset, yOffset_exp, damagedTime;
     private int hp = 100;
-    private bool isAttack, isDead = false;
+    private bool isAttack, isDead = false, damaged;
     private Animator animator;
     public ParticleSystem attackExplosion, deathExplosion;
     public GameObject ikura, hit, expInkGreen, expInkPink;
 
+    //スライム本体
+    public GameObject SmileBody;
+    //スライムの顔マテリアル
+    private Material faceMaterial;
+    //スライムの顔セット
+    public Face faces;
+
+    //スライムの顔を切り替える
+    void SetFace(Texture tex)
+    {
+        faceMaterial.SetTexture("_MainTex", tex);
+    }
 
     private void Start()
     {
+        //
+        faceMaterial = SmileBody.GetComponent<Renderer>().materials[1];
         //リジットボディを取得しrbに代入する
         rb = GetComponent<Rigidbody>();
         //爆発アニメーションを登録する
@@ -32,6 +46,22 @@ public class SlimeMove : MonoBehaviour
         {
             explosion();
             isDead = true;
+        }
+
+        if (damaged)
+        {
+            SetFace(faces.damageFace);
+            damagedTime++;
+        }
+        if (!damaged && !isAttack)
+        {
+            SetFace(faces.Idleface);
+        }
+
+        if (damagedTime > 72)
+        {
+            damaged = false;
+            damagedTime = 0;
         }
 
         var lookPos = tf_target.position - transform.position;
@@ -50,6 +80,8 @@ public class SlimeMove : MonoBehaviour
         if (other.gameObject.tag == "bullet")
         {
             hp -= 35;
+            damaged = true;
+            damagedTime = 0;
             hit.GetComponents<AudioSource>()[0].enabled = true;
             hit.GetComponents<AudioSource>()[1].enabled = false;
             Instantiate(hit, other.transform.position, Quaternion.identity);
@@ -63,6 +95,7 @@ public class SlimeMove : MonoBehaviour
         {
             this.speed = 0;
             isAttack = true;
+            SetFace(faces.attackFace);
             animator.SetBool("death", true);
         }
     }
@@ -81,11 +114,14 @@ public class SlimeMove : MonoBehaviour
             //爆発エフェクト（緑）再生
             Instantiate(attackExplosion, transform.position + new Vector3(0, yOffset, 0), Quaternion.identity);
             //地面塗りオブジェクト（兼攻撃判定）を出す
+            Instantiate(expInkGreen, transform.position + new Vector3(0, yOffset_exp, 0), Quaternion.identity);
         }
         else
         {
             //爆発エフェクト（ピンク）再生
             Instantiate(deathExplosion, transform.position + new Vector3(0, yOffset, 0), Quaternion.identity);
+            //地面塗りオブジェクトを出す
+            Instantiate(expInkPink, transform.position + new Vector3(0, yOffset_exp, 0), Quaternion.identity);
             //いくらを出す
             for (int i = 0; i < 3; i++)
             {

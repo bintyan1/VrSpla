@@ -131,9 +131,9 @@ MonoBehaviour:
   _sphere: {fileID: 5743035605032369196, guid: fde99a7d47e932e47b42e7cbacd199d6, type: 3}
   _muzzle: {fileID: 1412120488729811216}
   slider: {fileID: 0}
-  fire_speed: 5
+  fire_speed: 6
   reload_speed: 1
   reload_distance: 30
-  fire_rate: 5
-  fire_power: 5
+  fire_rate: 6
+  fire_power: 4
   effect: {fileID: 7591109422216228693, guid: ebfe257c795900a409d78e836d05be3d, type: 3}

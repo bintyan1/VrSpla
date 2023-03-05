@@ -128,3 +128,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   instPower: 5
+  isEarned: 0
+  target: {fileID: 0}
+  power: 0
+  damping: 0
+  targetStr: 
+  effect: {fileID: 7360384042906893034, guid: da0718cc24314774cb836101f0d8f145, type: 3}

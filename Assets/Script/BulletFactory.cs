@@ -7,17 +7,17 @@ using UnityEngine.UI;
 public class BulletFactory : MonoBehaviour
 {
     public GameObject _sphere;
-    [SerializeField]
-    private Transform _muzzle;
+    public Transform _muzzle, _muzzleb;
     public Slider slider;
     public int fire_speed = 5;
-    public int reload_speed = 1;
+    public static int reload_speed = 1;
     public int reload_distance = 30;
     private int time;
     private float fire_time = 60f;
     public float fire_rate = 60f;
-    public float fire_power;
+    public float fire_power, torque;
     public GameObject effect;
+    public bool bomb;
     void Start()
     {
         slider = GameObject.Find("Slider").GetComponent<Slider>();
@@ -25,8 +25,10 @@ public class BulletFactory : MonoBehaviour
     }
     void Update()
     {
-        if (0 < OVRInput.Get(OVRInput.Axis1D.SecondaryIndexTrigger) || Input.GetMouseButton(0))
+        //銃処理
+        if (0 < OVRInput.Get(OVRInput.Axis1D.SecondaryIndexTrigger) && !bomb || Input.GetMouseButton(0) && !bomb)
         {
+
             if (0 < slider.value)
             {
                 fire_time -= fire_rate;
@@ -39,8 +41,10 @@ public class BulletFactory : MonoBehaviour
 
             }
             time = 0;
-        }
-        else if (slider.value < slider.maxValue)
+
+
+        } //インク回復処理は銃のみ
+        else if (slider.value < slider.maxValue && !bomb)
         {
             if (reload_distance < time)
             {
@@ -49,14 +53,36 @@ public class BulletFactory : MonoBehaviour
             time++;
             fire_time = 60f;
         }
+
+        // ボムランチャー処理
+        if (OVRInput.GetDown(OVRInput.Button.PrimaryIndexTrigger) && bomb)
+        {
+            if (slider.value > 600 && bomb)
+            {
+                FireBomb();
+                slider.value -= 400;
+            }
+        }
     }
 
     public void Fire()
     {
         Vector3 pos = _muzzle.position;
         var obj = Instantiate(_sphere, pos, Quaternion.identity);
-        Instantiate(effect,pos,Quaternion.identity);
+        Instantiate(effect, pos, Quaternion.identity);
         Rigidbody rigidbody = obj.GetComponent<Rigidbody>();
         rigidbody.AddForce(_muzzle.forward * fire_power, ForceMode.Impulse);
+        rigidbody.AddTorque(new Vector3(Random.Range(-torque, torque), Random.Range(-torque, torque), Random.Range(-torque, torque)), ForceMode.Impulse);
     }
+
+    public void FireBomb()
+    {
+        Vector3 pos = _muzzleb.position;
+        var obj = Instantiate(_sphere, pos, Quaternion.identity);
+        Instantiate(effect, pos, Quaternion.identity);
+        Rigidbody rigidbody = obj.GetComponent<Rigidbody>();
+        rigidbody.AddForce(_muzzleb.forward * fire_power, ForceMode.Impulse);
+        rigidbody.AddTorque(new Vector3(Random.Range(-torque, torque), Random.Range(-torque, torque), Random.Range(-torque, torque)), ForceMode.Impulse);
+    }
+
 }

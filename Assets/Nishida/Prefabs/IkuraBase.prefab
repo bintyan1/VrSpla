@@ -43,7 +43,7 @@ SphereCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2425214092316569182}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.2
@@ -77,11 +77,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   instPower: 5
-  isEarned: 1
+  isEarned: 0
   target: {fileID: 0}
   power: 19.82
   damping: 37.62
   targetStr: MainCamera
+  effect: {fileID: 7360384042906893034, guid: da0718cc24314774cb836101f0d8f145, type: 3}
 --- !u!1001 &2425214093142663069
 PrefabInstance:
   m_ObjectHideFlags: 0

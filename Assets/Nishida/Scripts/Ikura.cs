@@ -13,6 +13,10 @@ public class Ikura : MonoBehaviour
     public float power, damping;
 
     public string targetStr;
+
+    public static int point;
+
+    public GameObject effect;
     // Start is called before the first frame update
     void Start()
     {
@@ -39,6 +43,16 @@ public class Ikura : MonoBehaviour
             //rbの回転をさせない様にする
             rb.constraints = RigidbodyConstraints.FreezeRotation;
             //rb.AddForce(Vector3.right * power, ForceMode.Acceleration);
+        }
+    }
+
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.tag == "Player")
+        {
+            Instantiate(effect, transform.position, Quaternion.identity);
+            point++;
+            Destroy(gameObject, 0.1f);
         }
     }
 }

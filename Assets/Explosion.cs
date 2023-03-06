@@ -4,16 +4,14 @@ using UnityEngine;
 
 public class Explosion : MonoBehaviour
 {
-    //ダメージ判定用 trueになったら攻撃判定しない
-    bool damaged;
+    // ボム爆発ダメージ持続時間
+    public float time = 0.2f;
 
     void OnCollisionEnter(Collision c)
     {
         if (c.gameObject.tag == "Stage")
         {
-            Destroy(gameObject, 0.2f);
+            Destroy(gameObject, time);
         }
     }
-
-
 }

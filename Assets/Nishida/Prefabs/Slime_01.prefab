@@ -301,7 +301,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 0}
+  - {fileID: 2100000, guid: 8c3f067d97073e844a53d8283b2d3820, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -381,11 +381,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tf_target: {fileID: 0}
-  target: MainCamera
+  target: Target
   damping: 10
   speed: 8.81
   yOffset: 1
   yOffset_exp: 0.21
+  damagedTime: 0
   attackExplosion: {fileID: 7591109422235924021, guid: 4df80846afd77df4ea0632a6eb2a37bb, type: 3}
   deathExplosion: {fileID: 7591109422235924021, guid: fe9fd5939d26d094498dfdba77c22457, type: 3}
   ikura: {fileID: 2425214092316569182, guid: 33e6ee8be46f6144ab60ad8ec753ac98, type: 3}

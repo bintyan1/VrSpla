@@ -98,6 +98,11 @@ public class SlimeMove : MonoBehaviour
             SetFace(faces.attackFace);
             animator.SetBool("death", true);
         }
+
+        if (other.tag == "bomb")
+        {
+            hp -= 101;
+        }
     }
 
     private void death()

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Ikura : MonoBehaviour
 {
@@ -17,6 +18,8 @@ public class Ikura : MonoBehaviour
     public static int point;
 
     public GameObject effect;
+
+    private Text counter;
     // Start is called before the first frame update
     void Start()
     {
@@ -25,6 +28,8 @@ public class Ikura : MonoBehaviour
         rb.AddForce(new Vector3(Random.Range(-instPower, instPower), Random.Range(1f, 5f), Random.Range(-instPower, instPower)), ForceMode.Impulse);
 
         target = GameObject.Find(targetStr).transform;
+
+        counter = GameObject.Find("IkuraCount").GetComponent<Text>();
     }
 
     // Update is called once per frame
@@ -50,8 +55,9 @@ public class Ikura : MonoBehaviour
     {
         if (other.gameObject.tag == "Player")
         {
-            Instantiate(effect, transform.position, Quaternion.identity);
+            Instantiate(effect, transform.GetChild(0).position, Quaternion.identity);
             point++;
+            counter.text = "いくら " + point + "こ";
             Destroy(gameObject, 0.1f);
         }
     }

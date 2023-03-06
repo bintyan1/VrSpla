@@ -140,6 +140,14 @@ PlayerSettings:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   metroInputSource: 0
   wsaTransparentSwapchain: 0
   m_HolographicPauseOnTrackingLoss: 1
@@ -708,8 +716,9 @@ PlayerSettings:
   webGLThreadsSupport: 0
   webGLDecompressionFallback: 0
   scriptingDefineSymbols:
-    Android: STARTER_ASSETS_PACKAGES_CHECKED
-    Standalone: STARTER_ASSETS_PACKAGES_CHECKED
+    Android: STARTER_ASSETS_PACKAGES_CHECKED;CROSS_PLATFORM_INPUT;MOBILE_INPUT
+    Standalone: STARTER_ASSETS_PACKAGES_CHECKED;CROSS_PLATFORM_INPUT
+    iPhone: CROSS_PLATFORM_INPUT;MOBILE_INPUT
   additionalCompilerArguments: {}
   platformArchitecture: {}
   scriptingBackend:
